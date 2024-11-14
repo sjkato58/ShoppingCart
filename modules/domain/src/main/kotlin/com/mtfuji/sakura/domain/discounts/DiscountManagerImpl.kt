@@ -16,7 +16,6 @@ class DiscountManagerImpl(
         withContext(dispatcherProvider.io) {
             val sortedDiscounts = discounts.sortedByDescending { it.rating }
 
-            val discountedProducts = mutableSetOf<String>()
             val appliedDiscounts = mutableListOf<AppliedDiscountModel>()
 
             val cartItemList = cartRepository.getItems()
@@ -24,37 +23,33 @@ class DiscountManagerImpl(
 
             var totalDiscount = 0.0
             for (discount in sortedDiscounts) {
+                discount.applyDiscount(
+                    appliedDiscounts,
+                    cartItemList
+                )?.let {
+                    appliedDiscounts.add(it)
+                }
+
                 when (discount) {
-                    is PercentageOffCartDiscount -> {
+                    /*is PercentageOffCartDiscount -> {
                         if (discount.canApplyDiscount(appliedDiscounts)) {
                             val cartDiscountAmount =
                                 discount.applyToTotal(totalCost - totalDiscount)
                             totalDiscount += cartDiscountAmount
-                            appliedDiscounts.add(
-                                AppliedDiscountModel(
-                                    productId = "Cart",
-                                    discountName = discount.name,
-                                    discountAmount = cartDiscountAmount
-                                )
-                            )
                         }
-                    }
-                    is BundleDiscount -> {
+                    }*/
+                    /*is BundleDiscount -> {
                         val eligibleCartItems = cartItemList.filterNot { discountedProducts.contains(it.product.id) }
                         val bundleDiscountAmount = discount.applyToCartList(eligibleCartItems)
                         if (bundleDiscountAmount > 0) {
                             totalDiscount += bundleDiscountAmount
                             discount.productIds.forEach { discountedProducts.add(it) }
                             appliedDiscounts.add(
-                                AppliedDiscountModel(
-                                    productId = "Bundle${discount.productIds}",
-                                    discountName = discount.name,
-                                    discountAmount = bundleDiscountAmount
-                                )
+
                             )
                         }
-                    }
-                    else -> {
+                    }*/
+                    /*else -> {
                         for (cartItem in cartItemList) {
                             if (discountedProducts.contains(cartItem.product.id)) continue
 
@@ -64,14 +59,14 @@ class DiscountManagerImpl(
                                 discountedProducts.add(cartItem.product.id)
                                 appliedDiscounts.add(
                                     AppliedDiscountModel(
-                                        productId = cartItem.product.id,
+                                        productIds = listOf(cartItem.product.id),
                                         discountName = discount.name,
                                         discountAmount = discountAmount
                                     )
                                 )
                             }
                         }
-                    }
+                    }*/
                 }
             }
 

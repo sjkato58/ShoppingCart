@@ -1,7 +1,7 @@
 package com.mtfuji.sakura.domain.discounts
 
+import com.mtfuji.sakura.domain.models.AppliedDiscountModel
 import com.mtfuji.sakura.domain.models.CartItemModel
-import com.mtfuji.sakura.domain.models.ProductModel
 
 class BundleDiscount(
     val productIds: List<String>,
@@ -9,11 +9,33 @@ class BundleDiscount(
     override val rating: Int,
     override val name: String
 ): Discounts {
-    override fun applyToProduct(product: ProductModel, quantity: Int): Double = 0.0
 
-    fun applyToCartList(cartList: List<CartItemModel>): Double {
-        val cartItemsMap = cartList.associateBy { it.product.id }
+    override fun applyDiscount(
+        appliedDiscounts: List<AppliedDiscountModel>,
+        cartItemList: List<CartItemModel>
+    ): AppliedDiscountModel? {
+        val discountedProductIds = appliedDiscounts.obtainProductIds()
 
+        val eligibleCartItems = cartItemList.fetchEligibleCartItems(discountedProductIds)
+
+        val cartItemsMap = eligibleCartItems.associateBy { it.product.id }
+
+        val discountAmount = calculateDiscount(cartItemsMap)
+        return if (discountAmount > 0) {
+            AppliedDiscountModel(
+                productIds = productIds,
+                discountName = name,
+                discountAmount = discountAmount,
+                discountPercentage = -1.0
+            )
+        } else null
+    }
+
+    private fun List<CartItemModel>.fetchEligibleCartItems(
+        discountedProductIds: Set<String>
+    ): List<CartItemModel> = this.filterNot { discountedProductIds.contains(it.product.id) }
+
+    private fun calculateDiscount(cartItemsMap: Map<String, CartItemModel>): Double {
         val numberOfSets = productIds.minOfOrNull { productId ->
             cartItemsMap[productId]?.quantity ?: 0
         } ?: 0
@@ -26,5 +48,4 @@ class BundleDiscount(
         val discountAmount = totalBundlePrice - (bundlePrice * numberOfSets)
         return if (discountAmount > 0) discountAmount else 0.0
     }
-
 }

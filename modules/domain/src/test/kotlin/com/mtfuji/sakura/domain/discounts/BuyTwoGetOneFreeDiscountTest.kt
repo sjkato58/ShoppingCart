@@ -1,12 +1,8 @@
 package com.mtfuji.sakura.domain.discounts
 
 import com.mtfuji.sakura.domain.dummyData.appleProductModel
-import com.mtfuji.sakura.domain.dummyData.baconLettuceTomatoProductModel
-import com.mtfuji.sakura.domain.dummyData.bananaProductModel
-import com.mtfuji.sakura.domain.dummyData.seaSaltStrollerProductModel
+import com.mtfuji.sakura.domain.models.AppliedDiscountModel
 import com.mtfuji.sakura.domain.models.CartItemModel
-import com.mtfuji.sakura.domain.utils.DispatcherProvider
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -23,23 +19,51 @@ class BuyTwoGetOneFreeDiscountTest {
 
     private lateinit var discount: BuyTwoGetOneFreeDiscount
 
+    companion object {
+        const val DISCOUNT_NAME = "Buy 2 get 1 free Discount"
+    }
+
+    private val cartList = listOf(
+        CartItemModel(
+            product = appleProductModel,
+            quantity = 7
+        )
+    )
+
     @BeforeEach
     fun setUp() {
         discount = BuyTwoGetOneFreeDiscount(
             productId = appleProductModel.id,
             rating = 2,
-            name = "Buy 2 get 1 free Discount"
+            name = DISCOUNT_NAME
         )
     }
 
     @Test
     fun `when a buy two get one free discount is valid then it should be applied`() =
         runTest(testDispatcher) {
-            val result = discount.applyToProduct(
-                product = appleProductModel,
-                quantity = 7
-            )
+            val result = discount.applyDiscount(listOf(), cartList)
             advanceUntilIdle()
-            assertEquals(1.5, result)
+            println("result: $result")
+            assertTrue(result != null)
+            assertEquals(1.5, result!!.discountAmount)
+            assertEquals(listOf(appleProductModel.id), result.productIds)
+            assertEquals(DISCOUNT_NAME, result.discountName)
+            assertEquals(-1.0, result.discountPercentage)
+        }
+
+    @Test
+    fun `when a product has already had a discount applied then this discount should not be applied`() =
+        runTest(testDispatcher) {
+            val appliedDiscountModel = AppliedDiscountModel(
+                productIds = listOf(appleProductModel.id),
+                discountName = BundleDiscountTest.DISCOUNT_NAME,
+                discountAmount = -1.0,
+                discountPercentage = -1.0
+            )
+            val result = discount.applyDiscount(listOf(appliedDiscountModel),  cartList)
+            advanceUntilIdle()
+            println("result: $result")
+            assertTrue(result == null)
         }
 }

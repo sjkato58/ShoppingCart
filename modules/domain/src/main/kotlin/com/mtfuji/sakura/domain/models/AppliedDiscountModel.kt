@@ -1,7 +1,8 @@
 package com.mtfuji.sakura.domain.models
 
 data class AppliedDiscountModel(
-    val productId: String,
+    val productIds: List<String>,
     val discountName: String,
-    val discountAmount: Double
+    val discountAmount: Double,
+    val discountPercentage: Double
 )

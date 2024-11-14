@@ -3,10 +3,8 @@ package com.mtfuji.sakura.domain.discounts
 import com.mtfuji.sakura.domain.dummyData.baconLettuceTomatoProductModel
 import com.mtfuji.sakura.domain.dummyData.bananaProductModel
 import com.mtfuji.sakura.domain.dummyData.seaSaltStrollerProductModel
+import com.mtfuji.sakura.domain.models.AppliedDiscountModel
 import com.mtfuji.sakura.domain.models.CartItemModel
-import com.mtfuji.sakura.domain.models.ProductModel
-import com.mtfuji.sakura.domain.utils.DispatcherProvider
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -21,53 +19,71 @@ class BundleDiscountTest {
 
     private val testDispatcher = StandardTestDispatcher()
 
-    private val dispatcherProvider = object : DispatcherProvider {
-        override val main: CoroutineDispatcher
-            get() = testDispatcher
-        override val io: CoroutineDispatcher
-            get() = testDispatcher
-        override val default: CoroutineDispatcher
-            get() = testDispatcher
-        override val unconfined: CoroutineDispatcher
-            get() = testDispatcher
+    private lateinit var discount: BundleDiscount
+
+    companion object {
+        const val DISCOUNT_NAME = "Meal Bundle Discount"
     }
 
-    private lateinit var discount: BundleDiscount
+    private val cartList = listOf(
+        CartItemModel(
+            product = bananaProductModel,
+            quantity = 3
+        ),
+        CartItemModel(
+            product = baconLettuceTomatoProductModel,
+            quantity = 3
+        ),
+        CartItemModel(
+            product = seaSaltStrollerProductModel,
+            quantity = 2
+        )
+    )
 
     @BeforeEach
     fun setUp() {
         discount = BundleDiscount(
             productIds = listOf(
                 bananaProductModel.id,
-                seaSaltStrollerProductModel.id,
-                baconLettuceTomatoProductModel.id
+                baconLettuceTomatoProductModel.id,
+                seaSaltStrollerProductModel.id
             ),
             bundlePrice = 3.0,
             rating = 3,
-            name = "Meal Bundle Discount"
+            name = DISCOUNT_NAME
         )
     }
 
     @Test
     fun `when a bundle discount is valid then it should be applied`() =
         runTest(testDispatcher) {
-            val cartList = listOf(
-                CartItemModel(
-                    product = bananaProductModel,
-                    quantity = 3
-                ),
-                CartItemModel(
-                    product = baconLettuceTomatoProductModel,
-                    quantity = 3
-                ),
-                CartItemModel(
-                    product = seaSaltStrollerProductModel,
-                    quantity = 2
-                )
-            )
-            val result = discount.applyToCartList(cartList)
-            println("result: $result")
+            val result = discount.applyDiscount(listOf(),  cartList)
             advanceUntilIdle()
-            assertEquals(3.5, result)
+            println("result: $result")
+            val productIdList = listOf(
+                bananaProductModel.id,
+                baconLettuceTomatoProductModel.id,
+                seaSaltStrollerProductModel.id
+            )
+            assertTrue(result != null)
+            assertEquals(3.5, result!!.discountAmount)
+            assertEquals(productIdList, result.productIds)
+            assertEquals(DISCOUNT_NAME, result.discountName)
+            assertEquals(-1.0, result.discountPercentage)
+        }
+
+    @Test
+    fun `when a product has already had a discount applied then this discount should not be applied`() =
+        runTest(testDispatcher) {
+            val appliedDiscountModel = AppliedDiscountModel(
+                productIds = listOf(bananaProductModel.id),
+                discountName = DISCOUNT_NAME,
+                discountAmount = -1.0,
+                discountPercentage = -1.0
+            )
+            val result = discount.applyDiscount(listOf(appliedDiscountModel),  cartList)
+            advanceUntilIdle()
+            println("result: $result")
+            assertTrue(result == null)
         }
 }

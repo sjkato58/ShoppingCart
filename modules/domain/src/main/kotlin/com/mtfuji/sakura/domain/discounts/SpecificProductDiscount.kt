@@ -1,6 +1,7 @@
 package com.mtfuji.sakura.domain.discounts
 
-import com.mtfuji.sakura.domain.models.ProductModel
+import com.mtfuji.sakura.domain.models.AppliedDiscountModel
+import com.mtfuji.sakura.domain.models.CartItemModel
 
 class SpecificProductDiscount(
     private val productId: String,
@@ -8,10 +9,24 @@ class SpecificProductDiscount(
     override val rating: Int,
     override val name: String
 ): Discounts {
-    override fun applyToProduct(product: ProductModel, quantity: Int): Double {
-        if (product.id == productId) {
-            return (product.price * quantity) * (discountPercentage / 100)
+
+    override fun applyDiscount(
+        appliedDiscounts: List<AppliedDiscountModel>,
+        cartItemList: List<CartItemModel>
+    ): AppliedDiscountModel? {
+        val discountedProductIds = appliedDiscounts.obtainProductIds()
+        for (cartItem in cartItemList) {
+            if (discountedProductIds.contains(cartItem.product.id).not()
+                && cartItem.product.id == productId) {
+                val baseTotalProductPrice = cartItem.product.price * cartItem.quantity
+                return AppliedDiscountModel(
+                    productIds = listOf(cartItem.product.id),
+                    discountName = name,
+                    discountAmount = baseTotalProductPrice * (discountPercentage / 100),
+                    discountPercentage = -1.0
+                )
+            }
         }
-        return 0.0
+        return null
     }
 }

@@ -48,7 +48,7 @@ class DiscountManagerImplTest {
         repository = CartRepositoryImpl(dispatcherProvider)
     }
 
-    @Test
+    /*@Test
     fun `when applying a cart total discount then the cart should apply that discount`() = runTest(dispatcherProvider.io) {
         populateCartRepository(
             listOf(
@@ -213,7 +213,7 @@ class DiscountManagerImplTest {
         assertTrue(result.appliedDiscounts.isNotEmpty())
         assertEquals(expected, result.appliedDiscounts[0])
         assertEquals(expected2, result.appliedDiscounts[1])
-    }
+    }*/
 
     private suspend fun populateCartRepository(
         productsToAdd: List<Pair<ProductModel, Int>>

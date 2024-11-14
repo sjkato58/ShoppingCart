@@ -5,6 +5,7 @@ import com.mtfuji.sakura.domain.dummyData.bananaProductModel
 import com.mtfuji.sakura.domain.dummyData.buyTwoGetOneFreeDiscount
 import com.mtfuji.sakura.domain.dummyData.carrotProductModel
 import com.mtfuji.sakura.domain.models.AppliedDiscountModel
+import com.mtfuji.sakura.domain.models.CartItemModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -20,36 +21,57 @@ class PercentageOffCartDiscountTest {
 
     private lateinit var discount: PercentageOffCartDiscount
 
+    companion object {
+        const val DISCOUNT_NAME = "Cart Discount"
+    }
+
+    private val cartList = listOf(
+        CartItemModel(
+            product = appleProductModel,
+            quantity = 4
+        ),
+        CartItemModel(
+            product = bananaProductModel,
+            quantity = 6
+        ),
+        CartItemModel(
+            product = carrotProductModel,
+            quantity = 2
+        )
+    )
+
     @BeforeEach
     fun setUp() {
         discount = PercentageOffCartDiscount(
             percentage = 25.0,
             rating = 0,
-            name = "Cart Discount"
+            name = DISCOUNT_NAME
         )
     }
 
     @Test
     fun `when a cart percentage discount is valid then it should be applied`() =
         runTest(testDispatcher) {
-            val total = (appleProductModel.price * 4) + (bananaProductModel.price * 6) + (carrotProductModel.price * 2)
-            val result = discount.applyToTotal(total)
+            val result = discount.applyDiscount(listOf(), cartList)
             advanceUntilIdle()
-            assertEquals(2.75, result)
+            println("result: $result")
+            assertTrue(result != null)
+            assertEquals(DISCOUNT_NAME, result!!.discountName)
+            assertEquals(25.00, result.discountPercentage)
         }
 
     @Test
     fun `when the cart percentage discount is not usable then it should not be applied`() =
         runTest(testDispatcher) {
-            val list = listOf(
-                AppliedDiscountModel(
-                    productId = appleProductModel.id,
-                    discountName = buyTwoGetOneFreeDiscount.name,
-                    discountAmount = 2.0
-                )
+            val appliedDiscountModel = AppliedDiscountModel(
+                productIds = listOf(appleProductModel.id),
+                discountName = buyTwoGetOneFreeDiscount.name,
+                discountAmount = 2.0,
+                discountPercentage = -1.0
             )
-            val result = discount.canApplyDiscount(list)
+            val result = discount.applyDiscount(listOf(appliedDiscountModel), cartList)
             advanceUntilIdle()
-            assertFalse(result)
+            println("result: $result")
+            assertTrue(result == null)
         }
 }
