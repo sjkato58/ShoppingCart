@@ -19,9 +19,6 @@ class DiscountManagerImpl(
             val appliedDiscounts = mutableListOf<AppliedDiscountModel>()
 
             val cartItemList = cartRepository.getItems()
-            val totalCost = cartRepository.getTotalCost()
-
-            var totalDiscount = 0.0
             for (discount in sortedDiscounts) {
                 discount.applyDiscount(
                     appliedDiscounts,
@@ -29,44 +26,16 @@ class DiscountManagerImpl(
                 )?.let {
                     appliedDiscounts.add(it)
                 }
+            }
 
-                when (discount) {
-                    /*is PercentageOffCartDiscount -> {
-                        if (discount.canApplyDiscount(appliedDiscounts)) {
-                            val cartDiscountAmount =
-                                discount.applyToTotal(totalCost - totalDiscount)
-                            totalDiscount += cartDiscountAmount
-                        }
-                    }*/
-                    /*is BundleDiscount -> {
-                        val eligibleCartItems = cartItemList.filterNot { discountedProducts.contains(it.product.id) }
-                        val bundleDiscountAmount = discount.applyToCartList(eligibleCartItems)
-                        if (bundleDiscountAmount > 0) {
-                            totalDiscount += bundleDiscountAmount
-                            discount.productIds.forEach { discountedProducts.add(it) }
-                            appliedDiscounts.add(
-
-                            )
-                        }
-                    }*/
-                    /*else -> {
-                        for (cartItem in cartItemList) {
-                            if (discountedProducts.contains(cartItem.product.id)) continue
-
-                            val discountAmount = discount.applyToProduct(cartItem.product, cartItem.quantity)
-                            if (discountAmount > 0) {
-                                totalDiscount += discountAmount
-                                discountedProducts.add(cartItem.product.id)
-                                appliedDiscounts.add(
-                                    AppliedDiscountModel(
-                                        productIds = listOf(cartItem.product.id),
-                                        discountName = discount.name,
-                                        discountAmount = discountAmount
-                                    )
-                                )
-                            }
-                        }
-                    }*/
+            var totalDiscount = 0.0
+            val totalCost = cartRepository.getTotalCost()
+            appliedDiscounts.forEach { appliedDiscountModel ->
+                if (appliedDiscountModel.discountPercentage != -1.0) {
+                    totalDiscount = totalCost * (appliedDiscountModel.discountPercentage / 100)
+                    return@forEach
+                } else {
+                    totalDiscount += appliedDiscountModel.discountAmount
                 }
             }
 
