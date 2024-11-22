@@ -20,5 +20,15 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "ShoppingCart"
-include(":app")
-include(":modules:domain")
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
+include(
+    ":app",
+    ":modules:data",
+    ":modules:dataModels",
+    ":modules:dataTest",
+    ":modules:domain",
+    ":modules:domainModels",
+    ":modules:utilities"
+)

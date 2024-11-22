@@ -1,4 +1,4 @@
-package com.mtfuji.sakura.domain.models
+package com.mtfuji.sakura.dataModels
 
 data class ProductModel(
     val id: String,

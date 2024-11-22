@@ -1,7 +1,7 @@
-package com.mtfuji.sakura.domain.repositories
+package com.mtfuji.sakura.data.repositories
 
-import com.mtfuji.sakura.domain.models.CartItemModel
-import com.mtfuji.sakura.domain.models.ProductModel
+import com.mtfuji.sakura.dataModels.CartItemModel
+import com.mtfuji.sakura.dataModels.ProductModel
 
 interface CartRepository {
     suspend fun addProduct(productModel: ProductModel, quantity: Int = 1)

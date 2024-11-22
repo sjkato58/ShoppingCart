@@ -1,9 +1,14 @@
 package com.mtfuji.sakura.domain.dummyData
 
+import com.mtfuji.sakura.datatest.appleProductModel
+import com.mtfuji.sakura.datatest.baconLettuceTomatoProductModel
+import com.mtfuji.sakura.datatest.bananaProductModel
+import com.mtfuji.sakura.datatest.seaSaltStrollerProductModel
 import com.mtfuji.sakura.domain.discounts.BundleDiscount
 import com.mtfuji.sakura.domain.discounts.BuyTwoGetOneFreeDiscount
 import com.mtfuji.sakura.domain.discounts.PercentageOffCartDiscount
 import com.mtfuji.sakura.domain.discounts.SpecificProductDiscount
+
 
 val bundleDiscount = BundleDiscount(
     productIds = listOf(

@@ -12,7 +12,12 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/modules" />
+            <option value="$PROJECT_DIR$/modules/data" />
+            <option value="$PROJECT_DIR$/modules/dataModels" />
+            <option value="$PROJECT_DIR$/modules/dataTest" />
             <option value="$PROJECT_DIR$/modules/domain" />
+            <option value="$PROJECT_DIR$/modules/domainModels" />
+            <option value="$PROJECT_DIR$/modules/utilities" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

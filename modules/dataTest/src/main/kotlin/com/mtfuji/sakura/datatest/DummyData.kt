@@ -1,6 +1,6 @@
-package com.mtfuji.sakura.domain.dummyData
+package com.mtfuji.sakura.datatest
 
-import com.mtfuji.sakura.domain.models.ProductModel
+import com.mtfuji.sakura.dataModels.ProductModel
 
 const val CATEGORY_FRUIT = "Fruit"
 const val CATEGORY_VEGETABLE = "Vegetable"

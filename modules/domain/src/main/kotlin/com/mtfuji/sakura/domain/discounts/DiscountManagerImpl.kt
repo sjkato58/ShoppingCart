@@ -1,9 +1,9 @@
 package com.mtfuji.sakura.domain.discounts
 
-import com.mtfuji.sakura.domain.models.AppliedDiscountModel
-import com.mtfuji.sakura.domain.models.CheckOutPricesModel
-import com.mtfuji.sakura.domain.repositories.CartRepository
-import com.mtfuji.sakura.domain.utils.DispatcherProvider
+import com.mtfuji.sakura.data.repositories.CartRepository
+import com.mtfuji.sakura.domainmodels.cart.CheckOutPricesModel
+import com.mtfuji.sakura.domainmodels.discounts.AppliedDiscountModel
+import com.mtfuji.sakura.utilities.DispatcherProvider
 import kotlinx.coroutines.withContext
 
 class DiscountManagerImpl(

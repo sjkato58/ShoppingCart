@@ -1,17 +1,17 @@
 package com.mtfuji.sakura.domain.usecases
 
 import com.mtfuji.sakura.domain.discounts.DiscountManagerImpl
-import com.mtfuji.sakura.domain.dummyData.appleProductModel
-import com.mtfuji.sakura.domain.dummyData.baconLettuceTomatoProductModel
-import com.mtfuji.sakura.domain.dummyData.bananaProductModel
 import com.mtfuji.sakura.domain.dummyData.bundleDiscount
 import com.mtfuji.sakura.domain.dummyData.buyTwoGetOneFreeDiscount
 import com.mtfuji.sakura.domain.dummyData.percentageOffCartDiscount
-import com.mtfuji.sakura.domain.dummyData.seaSaltStrollerProductModel
 import com.mtfuji.sakura.domain.dummyData.specificProductDiscount
-import com.mtfuji.sakura.domain.models.AppliedDiscountModel
-import com.mtfuji.sakura.domain.repositories.CartRepositoryImpl
-import com.mtfuji.sakura.domain.utils.DispatcherProvider
+import com.mtfuji.sakura.data.repositories.CartRepositoryImpl
+import com.mtfuji.sakura.datatest.appleProductModel
+import com.mtfuji.sakura.datatest.baconLettuceTomatoProductModel
+import com.mtfuji.sakura.datatest.bananaProductModel
+import com.mtfuji.sakura.datatest.seaSaltStrollerProductModel
+import com.mtfuji.sakura.domainmodels.discounts.AppliedDiscountModel
+import com.mtfuji.sakura.utilities.DispatcherProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher

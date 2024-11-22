@@ -1,4 +1,4 @@
-package com.mtfuji.sakura.domain.utils
+package com.mtfuji.sakura.utilities
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

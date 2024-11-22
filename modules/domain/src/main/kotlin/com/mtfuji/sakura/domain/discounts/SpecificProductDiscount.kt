@@ -1,7 +1,7 @@
 package com.mtfuji.sakura.domain.discounts
 
-import com.mtfuji.sakura.domain.models.AppliedDiscountModel
-import com.mtfuji.sakura.domain.models.CartItemModel
+import com.mtfuji.sakura.dataModels.CartItemModel
+import com.mtfuji.sakura.domainmodels.discounts.AppliedDiscountModel
 
 class SpecificProductDiscount(
     private val productId: String,

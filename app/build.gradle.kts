@@ -49,6 +49,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(projects.modules.data)
+    implementation(projects.modules.domain)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

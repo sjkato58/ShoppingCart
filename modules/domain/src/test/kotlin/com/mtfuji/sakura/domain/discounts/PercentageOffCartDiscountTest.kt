@@ -1,11 +1,11 @@
 package com.mtfuji.sakura.domain.discounts
 
-import com.mtfuji.sakura.domain.dummyData.appleProductModel
-import com.mtfuji.sakura.domain.dummyData.bananaProductModel
+import com.mtfuji.sakura.dataModels.CartItemModel
+import com.mtfuji.sakura.datatest.appleProductModel
+import com.mtfuji.sakura.datatest.bananaProductModel
+import com.mtfuji.sakura.datatest.carrotProductModel
+import com.mtfuji.sakura.domainmodels.discounts.AppliedDiscountModel
 import com.mtfuji.sakura.domain.dummyData.buyTwoGetOneFreeDiscount
-import com.mtfuji.sakura.domain.dummyData.carrotProductModel
-import com.mtfuji.sakura.domain.models.AppliedDiscountModel
-import com.mtfuji.sakura.domain.models.CartItemModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle

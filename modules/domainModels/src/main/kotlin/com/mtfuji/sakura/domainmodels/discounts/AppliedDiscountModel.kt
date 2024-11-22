@@ -1,4 +1,4 @@
-package com.mtfuji.sakura.domain.models
+package com.mtfuji.sakura.domainmodels.discounts
 
 data class AppliedDiscountModel(
     val productIds: List<String>,

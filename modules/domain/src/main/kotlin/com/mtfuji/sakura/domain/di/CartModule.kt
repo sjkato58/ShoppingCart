@@ -1,7 +1,7 @@
 package com.mtfuji.sakura.domain.di
 
-import com.mtfuji.sakura.domain.repositories.CartRepository
-import com.mtfuji.sakura.domain.repositories.CartRepositoryImpl
+import com.mtfuji.sakura.data.repositories.CartRepository
+import com.mtfuji.sakura.data.repositories.CartRepositoryImpl
 import com.mtfuji.sakura.domain.usecases.AddProductToCartUseCase
 import com.mtfuji.sakura.domain.usecases.AddProductToCartUseCaseImpl
 import com.mtfuji.sakura.domain.usecases.GetCartItemsUseCase

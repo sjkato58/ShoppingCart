@@ -1,6 +1,6 @@
 package com.mtfuji.sakura.domain.discounts
 
-import com.mtfuji.sakura.domain.models.AppliedDiscountModel
+import com.mtfuji.sakura.domainmodels.discounts.AppliedDiscountModel
 
 fun List<AppliedDiscountModel>.obtainProductIds(): Set<String> {
     val mutableList = mutableSetOf<String>()
