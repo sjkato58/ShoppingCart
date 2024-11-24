@@ -1,7 +1,5 @@
 package com.mtfuji.sakura.domain.di
 
-import com.mtfuji.sakura.data.repositories.CartRepository
-import com.mtfuji.sakura.data.repositories.CartRepositoryImpl
 import com.mtfuji.sakura.domain.usecases.AddProductToCartUseCase
 import com.mtfuji.sakura.domain.usecases.AddProductToCartUseCaseImpl
 import com.mtfuji.sakura.domain.usecases.GetCartItemsUseCase
@@ -16,9 +14,7 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-val cartModule = module {
-    singleOf(::CartRepositoryImpl).bind<CartRepository>()
-
+val cartUseCaseModule = module {
     singleOf(::AddProductToCartUseCaseImpl).bind<AddProductToCartUseCase>()
     singleOf(::GetCartItemsUseCaseImpl).bind<GetCartItemsUseCase>()
     singleOf(::GetCartTotalCostUseCaseImpl).bind<GetCartTotalCostUseCase>()

@@ -1,4 +1,4 @@
-package com.mtfuji.sakura.domain.di
+package com.mtfuji.sakura.shoppingcart.di
 
 import com.mtfuji.sakura.domain.discounts.BundleDiscount
 import com.mtfuji.sakura.domain.discounts.BuyTwoGetOneFreeDiscount

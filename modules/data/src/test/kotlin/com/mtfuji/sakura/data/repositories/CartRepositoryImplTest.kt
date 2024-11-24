@@ -3,7 +3,7 @@ package com.mtfuji.sakura.data.repositories
 import com.mtfuji.sakura.dataModels.CartItemModel
 import com.mtfuji.sakura.datatest.appleProductModel
 import com.mtfuji.sakura.datatest.bananaProductModel
-import com.mtfuji.sakura.utilities.DispatcherProvider
+import om.mtfuji.sakura.utilities.DispatcherProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher

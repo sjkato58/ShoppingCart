@@ -3,7 +3,7 @@ package com.mtfuji.sakura.domain.discounts
 import com.mtfuji.sakura.data.repositories.CartRepository
 import com.mtfuji.sakura.domainmodels.cart.CheckOutPricesModel
 import com.mtfuji.sakura.domainmodels.discounts.AppliedDiscountModel
-import com.mtfuji.sakura.utilities.DispatcherProvider
+import om.mtfuji.sakura.utilities.DispatcherProvider
 import kotlinx.coroutines.withContext
 
 class DiscountManagerImpl(
