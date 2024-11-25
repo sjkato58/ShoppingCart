@@ -1,6 +1,7 @@
 package com.mtfuji.sakura.shoppingcart
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -11,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.mtfuji.sakura.shoppingcart.ui.theme.ShoppingCartTheme
 
 class MainActivity : ComponentActivity() {
@@ -27,6 +29,23 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+        val remoteConfig = FirebaseRemoteConfig.getInstance()
+        remoteConfig
+            .fetchAndActivate()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val jsonString = remoteConfig.getString("product_list")
+                    Log.i("seiji", "jsonString: $jsonString")
+                } else {
+                    Log.e("seiji", "FirebaseRemoteConfig - failed - ${task.exception}")
+                }
+            }
+            .addOnSuccessListener {
+                Log.d("seiji", "FirebaseRemoteConfig - Success!")
+            }
+            .addOnFailureListener {
+                Log.e("seiji", "FirebaseRemoteConfig - Failed - $it")
+            }
     }
 }
 
