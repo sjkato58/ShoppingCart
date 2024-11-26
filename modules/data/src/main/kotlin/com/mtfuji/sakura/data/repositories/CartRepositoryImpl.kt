@@ -2,7 +2,7 @@ package com.mtfuji.sakura.data.repositories
 
 import com.mtfuji.sakura.dataModels.CartItemModel
 import com.mtfuji.sakura.dataModels.ProductModel
-import om.mtfuji.sakura.utilities.DispatcherProvider
+import com.mtfuji.sakura.utilities.DispatcherProvider
 import kotlinx.coroutines.withContext
 
 class CartRepositoryImpl(

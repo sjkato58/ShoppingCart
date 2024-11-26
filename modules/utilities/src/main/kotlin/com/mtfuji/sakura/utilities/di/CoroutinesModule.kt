@@ -1,7 +1,7 @@
-package om.mtfuji.sakura.utilities.di
+package com.mtfuji.sakura.utilities.di
 
-import om.mtfuji.sakura.utilities.DefaultDispatcherProvider
-import om.mtfuji.sakura.utilities.DispatcherProvider
+import com.mtfuji.sakura.utilities.DefaultDispatcherProvider
+import com.mtfuji.sakura.utilities.DispatcherProvider
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module

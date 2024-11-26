@@ -58,7 +58,9 @@ dependencies {
     implementation(libs.koin)
     implementation(libs.koin.android)
     implementation(projects.modules.data)
+    implementation(projects.modules.dataModels)
     implementation(projects.modules.domain)
+    implementation(projects.modules.domainModels)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

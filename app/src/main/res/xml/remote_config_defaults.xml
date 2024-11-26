@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<defaults>
+  <entry>
+    <key>product_list</key>
+    <value>[{"id":"12345","name":"Apple","price":0.75,"description":"Pink Lady, Single, Fresh and firm","imageUrl":"misc","category":"Fruit"},{"id":"23451","name":"Banana","price":1.25,"description":"Pack of 5, Organic","imageUrl":"misc","category":"Fruit"},{"id":"34512","name":"Carrot","price":0.25,"description":"Single, Organic, Good for the Eyes","imageUrl":"misc","category":"Vegetable"},{"id":"45123","name":"Sea Salt Stroller","price":1,"description":"Artificial Goodness, Sea salty goodness","imageUrl":"misc","category":"Crisp"},{"id":"51234","name":"BLT Sandwich","price":2.5,"description":"Bacon Lettuce Tomato Sandwich, All that good salty bacon","imageUrl":"misc","category":"Sandwich"}]</value>
+  </entry>
+</defaults>

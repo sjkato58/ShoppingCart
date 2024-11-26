@@ -3,7 +3,8 @@ package com.mtfuji.sakura.shoppingcart.di
 import android.app.Application
 import com.mtfuji.sakura.data.di.cartDataModule
 import com.mtfuji.sakura.domain.di.cartUseCaseModule
-import om.mtfuji.sakura.utilities.di.coroutineModule
+import com.mtfuji.sakura.shoppingcart.firebase.di.fireBaseConfigModule
+import com.mtfuji.sakura.utilities.di.coroutineModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.KoinApplication
@@ -18,7 +19,8 @@ object DefaultKoinInitializer: KoinInitializer {
                 coroutineModule,
                 cartDataModule,
                 cartUseCaseModule,
-                discountsModule
+                discountsModule,
+                fireBaseConfigModule
             )
         }
     }

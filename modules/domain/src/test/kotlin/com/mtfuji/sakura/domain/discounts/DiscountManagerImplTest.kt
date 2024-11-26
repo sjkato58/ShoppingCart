@@ -12,7 +12,7 @@ import com.mtfuji.sakura.domain.dummyData.bundleDiscount
 import com.mtfuji.sakura.domain.dummyData.buyTwoGetOneFreeDiscount
 import com.mtfuji.sakura.domain.dummyData.percentageOffCartDiscount
 import com.mtfuji.sakura.domain.dummyData.specificProductDiscount
-import om.mtfuji.sakura.utilities.DispatcherProvider
+import com.mtfuji.sakura.utilities.DispatcherProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher

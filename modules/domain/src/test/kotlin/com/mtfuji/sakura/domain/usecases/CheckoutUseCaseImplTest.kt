@@ -11,7 +11,7 @@ import com.mtfuji.sakura.datatest.baconLettuceTomatoProductModel
 import com.mtfuji.sakura.datatest.bananaProductModel
 import com.mtfuji.sakura.datatest.seaSaltStrollerProductModel
 import com.mtfuji.sakura.domainmodels.discounts.AppliedDiscountModel
-import om.mtfuji.sakura.utilities.DispatcherProvider
+import com.mtfuji.sakura.utilities.DispatcherProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
