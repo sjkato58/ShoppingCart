@@ -29,10 +29,12 @@ class MyApplication: Application() {
     private fun initFirebaseRemoteConfig() {
         scope.launch {
             val initFirebaseUseCase: InitFirebaseUseCase = getKoin().get()
-            initFirebaseUseCase.initializeFirebaseManager(R.xml.remote_config_defaults)
+            val isSuccess = initFirebaseUseCase.initializeFirebaseManager(R.xml.remote_config_defaults)
 
-            val loadShopProductListUseCase: LoadShopProductListUseCase = getKoin().get()
-            loadShopProductListUseCase.loadProductList()
+            if (isSuccess) {
+                val loadShopProductListUseCase: LoadShopProductListUseCase = getKoin().get()
+                loadShopProductListUseCase.loadProductList()
+            }
         }
     }
 
