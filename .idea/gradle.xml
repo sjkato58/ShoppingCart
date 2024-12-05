@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/modules/dataTest" />
             <option value="$PROJECT_DIR$/modules/domain" />
             <option value="$PROJECT_DIR$/modules/domainModels" />
+            <option value="$PROJECT_DIR$/modules/firebase" />
             <option value="$PROJECT_DIR$/modules/utilities" />
           </set>
         </option>

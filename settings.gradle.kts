@@ -32,3 +32,4 @@ include(
     ":modules:domainModels",
     ":modules:utilities"
 )
+include(":modules:firebase")

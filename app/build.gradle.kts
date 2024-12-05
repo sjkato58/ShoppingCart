@@ -38,7 +38,7 @@ android {
     buildFeatures {
         compose = true
     }
-    sourceSets {
+    /*sourceSets {
         getByName("main") {
             java.srcDirs("src/main/kotlin")
         }
@@ -49,22 +49,18 @@ android {
             java.srcDirs("src/androidTest/kotlin")
         }
     }
-    /*tasks.withType<Test> {
-        println("Adding build/tmp/kotlin-classes/debug to test classpath")
-        classpath += files("build/tmp/kotlin-classes/debug")
-    }*/
     tasks.withType<Test> {
         doFirst {
-            classpath += files("$buildDir/tmp/kotlin-classes/debug")
+            //println("Adding build/tmp/kotlin-classes/debug to test classpath")
+            //classpath += files("${layout.buildDirectory}/tmp/kotlin-classes/debug")
+            classpath += files(android.sourceSets.getByName("main").java.srcDirs())
+            println("Test classpath Start:")
+            classpath.forEach { file ->
+                println(" :: $file")
+            }
+            println("Test classpath Ends")
         }
-    }
-    tasks.register("printTestClasspath") {
-        doLast {
-            println("Test classpath:")
-            val testTask = tasks.named<Test>("testDebugUnitTest").get()
-            testTask.classpath.files.forEach { println(it) }
-        }
-    }
+    }*/
 }
 
 dependencies {
@@ -88,10 +84,13 @@ dependencies {
     implementation(projects.modules.dataModels)
     implementation(projects.modules.domain)
     implementation(projects.modules.domainModels)
+    implementation(projects.modules.firebase)
     implementation(projects.modules.utilities)
 
     testImplementation(libs.junit)
     testImplementation(libs.junit.jupiter)
+    testImplementation(kotlin("test"))
+    testImplementation(libs.kotlin.test)
     testImplementation(libs.firebase.config)
     testImplementation(libs.kotlinx.coroutines.test)
 
