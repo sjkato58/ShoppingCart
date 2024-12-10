@@ -30,6 +30,6 @@ include(
     ":modules:dataTest",
     ":modules:domain",
     ":modules:domainModels",
+    ":modules:firebase",
     ":modules:utilities"
 )
-include(":modules:firebase")

@@ -1,3 +1,5 @@
+import com.android.build.gradle.BaseExtension
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -38,29 +40,7 @@ android {
     buildFeatures {
         compose = true
     }
-    /*sourceSets {
-        getByName("main") {
-            java.srcDirs("src/main/kotlin")
-        }
-        getByName("test") {
-            java.srcDirs("src/test/kotlin")
-        }
-        getByName("androidTest"){
-            java.srcDirs("src/androidTest/kotlin")
-        }
-    }
-    tasks.withType<Test> {
-        doFirst {
-            //println("Adding build/tmp/kotlin-classes/debug to test classpath")
-            //classpath += files("${layout.buildDirectory}/tmp/kotlin-classes/debug")
-            classpath += files(android.sourceSets.getByName("main").java.srcDirs())
-            println("Test classpath Start:")
-            classpath.forEach { file ->
-                println(" :: $file")
-            }
-            println("Test classpath Ends")
-        }
-    }*/
+    configureSourceSets()
 }
 
 dependencies {
@@ -101,4 +81,18 @@ dependencies {
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+
+private fun BaseExtension.configureSourceSets() {
+    sourceSets {
+        getByName("main") {
+            java.srcDirs("src/main/java")
+        }
+        getByName("test") {
+            java.srcDirs("src/test/java", "src/main/java")
+        }
+        getByName("androidTest"){
+            java.srcDirs("src/androidTest/java")
+        }
+    }
 }

@@ -1,6 +1,5 @@
 package com.mtfuji.sakura.firebase.usecases
 
-import android.util.Log
 import com.mtfuji.sakura.data.repositories.ShopRepository
 import com.mtfuji.sakura.dataModels.ProductModel
 import com.mtfuji.sakura.firebase.FirebaseConfigManager
@@ -22,7 +21,6 @@ class LoadShopProductListUseCaseImpl(
         withContext(dispatcherProvider.default) {
             val productJson = firebaseConfigManager.getConfigValue(PRODUCT_LIST_KEY)
             val productList = parseProductListJSON(productJson)
-            Log.e("seiji", "LoadShopProductListUseCaseImpl - loadProductList: $productList")
             shopRepository.setProducts(productList)
         }
     }
