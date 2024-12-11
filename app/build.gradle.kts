@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.google.services)
 }
 
@@ -53,6 +54,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.coroutines)
     implementation(libs.kotlinx.serialization.json)
     implementation(platform(libs.firebase.bom))
@@ -60,6 +62,7 @@ dependencies {
     implementation(libs.firebase.config)
     implementation(libs.koin)
     implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
     implementation(projects.modules.data)
     implementation(projects.modules.dataModels)
     implementation(projects.modules.domain)

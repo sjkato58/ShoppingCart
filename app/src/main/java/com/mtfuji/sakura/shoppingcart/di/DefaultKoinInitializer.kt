@@ -20,7 +20,8 @@ object DefaultKoinInitializer: KoinInitializer {
                 cartDataModule,
                 cartUseCaseModule,
                 discountsModule,
-                fireBaseConfigModule
+                fireBaseConfigModule,
+                homeModule
             )
         }
     }

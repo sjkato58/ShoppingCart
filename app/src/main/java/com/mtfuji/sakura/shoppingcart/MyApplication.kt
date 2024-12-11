@@ -31,12 +31,7 @@ class MyApplication: Application() {
         FirebaseApp.initializeApp(this@MyApplication)
         scope.launch {
             val initFirebaseUseCase: InitFirebaseUseCase = getKoin().get()
-            val isSuccess = initFirebaseUseCase.initializeFirebaseManager(R.xml.remote_config_defaults)
-
-            if (isSuccess) {
-                val loadShopProductListUseCase: LoadShopProductListUseCase = getKoin().get()
-                loadShopProductListUseCase.loadProductList()
-            }
+            initFirebaseUseCase.initializeFirebaseManager(R.xml.remote_config_defaults)
         }
     }
 
