@@ -4,10 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import com.mtfuji.sakura.shoppingcart.ui.ShopAppState
-import com.mtfuji.sakura.shoppingcart.ui.home.HomeRoute
-import com.mtfuji.sakura.shoppingcart.ui.home.homeRoute
-import com.mtfuji.sakura.shoppingcart.ui.productlist.ProductListRoute
-import com.mtfuji.sakura.shoppingcart.ui.productlist.productListRoute
+import com.mtfuji.sakura.home.HomeRoute
+import com.mtfuji.sakura.home.homeRoute
+import com.mtfuji.sakura.features.productlist.productListRoute
 
 @Composable
 fun ShopNavHost(
@@ -21,7 +20,7 @@ fun ShopNavHost(
         modifier = modifier
     ) {
         homeRoute {
-            navController.navigate(ProductListRoute)
+            navController.navigate(com.mtfuji.sakura.features.productlist.ProductListRoute)
         }
         productListRoute()
     }

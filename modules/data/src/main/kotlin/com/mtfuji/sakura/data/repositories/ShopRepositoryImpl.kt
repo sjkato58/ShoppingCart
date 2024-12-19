@@ -11,24 +11,23 @@ class ShopRepositoryImpl(
     private val localDataSource: ShopLocalDataSource,
     private val remoteDataSource: ShopRemoteDataSource
 ): ShopRepository {
-    override suspend fun setProducts(productList: List<ProductModel>) {
-        withContext(dispatcherProvider.io) {
-            localDataSource.setShoppingData(productList)
-        }
-    }
-
     override suspend fun getProducts(): List<ProductModel> {
         return withContext(dispatcherProvider.io) {
             val items = localDataSource.getShoppingData()
             items.ifEmpty {
-                val response = remoteDataSource.loadShopData()
-                println("ShopRepositoryImpl - getProducts: $response")
-                if (response.isNotEmpty()) {
-                    localDataSource.setShoppingData(response)
-                    response
-                } else {
-                    throw Exception("No Items!")
-                }
+                refreshProducts()
+            }
+        }
+    }
+
+    override suspend fun refreshProducts(): List<ProductModel> {
+        return withContext(dispatcherProvider.io) {
+            val response = remoteDataSource.loadShopData()
+            if (response.isNotEmpty()) {
+                localDataSource.setShoppingData(response)
+                response
+            } else {
+                throw Exception("No Items!")
             }
         }
     }

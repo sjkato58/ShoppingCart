@@ -10,14 +10,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.mtfuji.sakura.m3compose.theme.ShoppingCartTheme
 import com.mtfuji.sakura.shoppingcart.navigation.ShopNavHost
 import com.mtfuji.sakura.shoppingcart.ui.ShopAppState
 import com.mtfuji.sakura.shoppingcart.ui.rememberShopAppState
-import com.mtfuji.sakura.shoppingcart.ui.theme.ShoppingCartTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,7 +59,7 @@ fun MainScreen(
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    ShoppingCartTheme {
+    com.mtfuji.sakura.m3compose.theme.ShoppingCartTheme {
         val appState = rememberShopAppState()
         MainScreen(
             appState = appState

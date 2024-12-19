@@ -63,11 +63,16 @@ dependencies {
     implementation(libs.koin)
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
+    implementation(libs.material)
+
     implementation(projects.modules.data)
     implementation(projects.modules.dataModels)
     implementation(projects.modules.domain)
     implementation(projects.modules.domainModels)
     implementation(projects.modules.firebase)
+    implementation(projects.modules.features.home)
+    implementation(projects.modules.features.productlist)
+    implementation(projects.modules.m3compose)
     implementation(projects.modules.utilities)
 
     testImplementation(libs.junit)

@@ -4,7 +4,6 @@ import android.app.Application
 import com.google.firebase.FirebaseApp
 import com.mtfuji.sakura.shoppingcart.di.DefaultKoinInitializer
 import com.mtfuji.sakura.firebase.usecases.InitFirebaseUseCase
-import com.mtfuji.sakura.firebase.usecases.LoadShopProductListUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob

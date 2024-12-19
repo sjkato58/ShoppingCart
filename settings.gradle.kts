@@ -31,5 +31,8 @@ include(
     ":modules:domain",
     ":modules:domainModels",
     ":modules:firebase",
+    ":modules:features:home",
+    ":modules:features:productlist",
+    ":modules:m3compose",
     ":modules:utilities"
 )

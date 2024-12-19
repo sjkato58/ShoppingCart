@@ -5,6 +5,7 @@ import com.mtfuji.sakura.data.di.cartDataModule
 import com.mtfuji.sakura.domain.di.cartUseCaseModule
 import com.mtfuji.sakura.domain.di.shopModule
 import com.mtfuji.sakura.firebase.di.fireBaseConfigModule
+import com.mtfuji.sakura.home.di.homeModule
 import com.mtfuji.sakura.utilities.di.coroutineModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -24,7 +25,8 @@ object DefaultKoinInitializer: KoinInitializer {
                 discountsModule,
                 fireBaseConfigModule,
                 componentsModule,
-                homeModule
+                homeModule,
+                com.mtfuji.sakura.features.productlist.di.productListModule
             )
         }
     }
