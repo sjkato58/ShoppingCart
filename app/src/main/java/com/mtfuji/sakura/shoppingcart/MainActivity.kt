@@ -4,18 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.mtfuji.sakura.m3compose.theme.ShoppingCartTheme
-import com.mtfuji.sakura.shoppingcart.navigation.ShopNavHost
-import com.mtfuji.sakura.shoppingcart.ui.ShopAppState
+import com.mtfuji.sakura.shoppingcart.ui.MainScreen
 import com.mtfuji.sakura.shoppingcart.ui.rememberShopAppState
 
 class MainActivity : ComponentActivity() {
@@ -30,39 +20,5 @@ class MainActivity : ComponentActivity() {
                 )
             }
         }
-    }
-}
-
-@Composable
-fun MainScreen(
-    appState: ShopAppState
-) {
-    Surface(
-        modifier = Modifier
-            .background(
-                color = MaterialTheme.colorScheme.background
-            )
-    ) {
-        Scaffold(
-            modifier = Modifier
-        ) { paddingValues ->
-            ShopNavHost(
-                appState,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues)
-            )
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    com.mtfuji.sakura.m3compose.theme.ShoppingCartTheme {
-        val appState = rememberShopAppState()
-        MainScreen(
-            appState = appState
-        )
     }
 }

@@ -77,9 +77,7 @@ dependencies {
 
     testImplementation(libs.junit)
     testImplementation(libs.junit.jupiter)
-    testImplementation(kotlin("test"))
     testImplementation(libs.kotlin.test)
-    testImplementation(libs.firebase.config)
     testImplementation(libs.kotlinx.coroutines.test)
 
     androidTestImplementation(libs.androidx.junit)

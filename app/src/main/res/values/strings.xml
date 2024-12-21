@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ShoppingCart</string>
+    <string name="nav_data_home">The Shopping Cart</string>
+    <string name="nav_data_product_list">Shop Contents</string>
 </resources>
