@@ -1,7 +1,7 @@
 package com.mtfuji.sakura.shoppingcart.components.data.sources.remote
 
-import com.mtfuji.sakura.data.sources.remote.ShopRemoteDataSource
-import com.mtfuji.sakura.dataModels.ProductModel
+import com.mtfuji.sakura.data.shop.sources.remote.ShopRemoteDataSource
+import com.mtfuji.sakura.dataModels.shop.ApiProductModel
 import com.mtfuji.sakura.firebase.FirebaseConfigManager
 import com.mtfuji.sakura.utilities.DispatcherProvider
 import kotlinx.coroutines.withContext
@@ -16,12 +16,12 @@ class ShopRemoteDataSourceImpl(
         const val PRODUCT_LIST_KEY = "product_list"
     }
 
-    override suspend fun loadShopData(): List<ProductModel> = withContext(dispatcherProvider.io) {
+    override suspend fun loadShopData(): List<ApiProductModel> = withContext(dispatcherProvider.io) {
         val productJson = firebaseConfigManager.getConfigValue(PRODUCT_LIST_KEY)
         parseProductListJSON(productJson)
     }
 
-    private fun parseProductListJSON(jsonString: String): List<ProductModel> {
+    private fun parseProductListJSON(jsonString: String): List<ApiProductModel> {
         return Json.decodeFromString(jsonString)
     }
 }

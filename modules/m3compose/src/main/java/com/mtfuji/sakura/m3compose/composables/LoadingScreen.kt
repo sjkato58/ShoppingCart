@@ -15,7 +15,7 @@ import com.mtfuji.sakura.m3compose.theme.ShoppingCartTheme
 
 @Composable
 fun LoadingScreen(
-    color: Color = MaterialTheme.colorScheme.secondary,
+    color: Color = MaterialTheme.colorScheme.primary,
     trackColor: Color = MaterialTheme.colorScheme.surfaceVariant
 ) {
     Box(
@@ -40,7 +40,6 @@ private fun Preview() {
         Surface(
             modifier = Modifier
                 .fillMaxSize()
-                .background(color = Color.White)
         ) {
             LoadingScreen()
         }

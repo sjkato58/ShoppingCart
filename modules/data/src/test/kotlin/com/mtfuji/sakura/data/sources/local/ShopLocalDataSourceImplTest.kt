@@ -1,6 +1,7 @@
 package com.mtfuji.sakura.data.sources.local
 
-import com.mtfuji.sakura.dataModels.ProductModel
+import com.mtfuji.sakura.data.shop.sources.local.ShopLocalDataSourceImpl
+import com.mtfuji.sakura.dataModels.shop.ApiProductModel
 import com.mtfuji.sakura.utilities.DispatcherProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -38,7 +39,7 @@ class ShopLocalDataSourceImplTest {
         const val PRODUCT_LIST_VALUE = "[{\"id\":\"$PRODUCT_ID\",\"name\":\"$PRODUCT_NAME\",\"price\":$PRODUCT_PRICE,\"description\":\"$PRODUCT_DESCRIPTION\",\"imageUrl\":\"$PRODUCT_IMAGE\",\"category\":\"$PRODUCT_CATEGORY\"}]"
     }
 
-    private val exampleProduct = ProductModel(
+    private val exampleProduct = ApiProductModel(
         id = PRODUCT_ID,
         name = PRODUCT_NAME,
         price = PRODUCT_PRICE.toDouble(),

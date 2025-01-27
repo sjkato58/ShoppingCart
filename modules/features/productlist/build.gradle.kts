@@ -54,6 +54,7 @@ dependencies {
 
     implementation(projects.modules.dataModels)
     implementation(projects.modules.domain)
+    implementation(projects.modules.domainModels)
     implementation(projects.modules.m3compose)
     implementation(projects.modules.utilities)
 

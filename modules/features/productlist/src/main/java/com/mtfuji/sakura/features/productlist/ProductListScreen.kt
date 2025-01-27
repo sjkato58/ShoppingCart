@@ -1,6 +1,5 @@
 package com.mtfuji.sakura.features.productlist
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -11,27 +10,27 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.mtfuji.sakura.dataModels.ProductModel
+import com.mtfuji.sakura.domainmodels.shop.ProductModel
 import com.mtfuji.sakura.m3compose.composables.LoadingScreen
+import com.mtfuji.sakura.m3compose.model.UiState
 import com.mtfuji.sakura.m3compose.theme.ShoppingCartTheme
 import com.mtfuji.sakura.m3compose.theme.dimens
 
 @Composable
 fun ProductsListScreen(
-    uiState: ProductListUiState
+    uiState: UiState<List<ProductModel>>
 ) {
     when (uiState) {
-        is ProductListUiState.Loading -> {
+        is UiState.Loading -> {
             ProductListLoadingScreen()
         }
-        is ProductListUiState.Success -> {
+        is UiState.Success -> {
             ProductListProductsScreen(
-                productList = uiState.productList
+                productList = uiState.data
             )
         }
-        is ProductListUiState.Error -> {
+        is UiState.Error -> {
 
         }
     }
@@ -77,10 +76,9 @@ private fun ProductListScreenLoadingPreview() {
         Surface(
             modifier = Modifier
                 .fillMaxSize()
-                .background(color = Color.White)
         ) {
             ProductsListScreen(
-                uiState = ProductListUiState.Loading
+                uiState = UiState.Loading
             )
         }
     }

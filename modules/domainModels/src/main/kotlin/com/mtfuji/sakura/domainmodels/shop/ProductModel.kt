@@ -1,8 +1,5 @@
-package com.mtfuji.sakura.dataModels
+package com.mtfuji.sakura.domainmodels.shop
 
-import kotlinx.serialization.Serializable
-
-@Serializable
 data class ProductModel(
     val id: String,
     val name: String,

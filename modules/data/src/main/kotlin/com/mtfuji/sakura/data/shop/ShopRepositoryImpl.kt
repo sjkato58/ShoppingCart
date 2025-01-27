@@ -1,8 +1,9 @@
-package com.mtfuji.sakura.data.repositories
+package com.mtfuji.sakura.data.shop
 
-import com.mtfuji.sakura.data.sources.local.ShopLocalDataSource
-import com.mtfuji.sakura.data.sources.remote.ShopRemoteDataSource
+import com.mtfuji.sakura.data.shop.sources.local.ShopLocalDataSource
+import com.mtfuji.sakura.data.shop.sources.remote.ShopRemoteDataSource
 import com.mtfuji.sakura.dataModels.ProductModel
+import com.mtfuji.sakura.dataModels.shop.ApiProductModel
 import com.mtfuji.sakura.utilities.DispatcherProvider
 import kotlinx.coroutines.withContext
 
@@ -11,16 +12,16 @@ class ShopRepositoryImpl(
     private val localDataSource: ShopLocalDataSource,
     private val remoteDataSource: ShopRemoteDataSource
 ): ShopRepository {
-    override suspend fun getProducts(): List<ProductModel> {
+    override suspend fun getProducts(): List<ApiProductModel> {
         return withContext(dispatcherProvider.io) {
             val items = localDataSource.getShoppingData()
             items.ifEmpty {
-                refreshProducts()
+                fetchProducts()
             }
         }
     }
 
-    override suspend fun refreshProducts(): List<ProductModel> {
+    override suspend fun fetchProducts(): List<ApiProductModel> {
         return withContext(dispatcherProvider.io) {
             val response = remoteDataSource.loadShopData()
             if (response.isNotEmpty()) {
