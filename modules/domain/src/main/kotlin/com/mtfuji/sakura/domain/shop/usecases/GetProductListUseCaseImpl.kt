@@ -1,6 +1,6 @@
 package com.mtfuji.sakura.domain.shop.usecases
 
-import com.mtfuji.sakura.data.shop.ShopRepository
+import com.mtfuji.sakura.data.shop.ShoppingItemsRepository
 import com.mtfuji.sakura.domain.shop.parser.toModel
 import com.mtfuji.sakura.domainmodels.shop.ProductModel
 import com.mtfuji.sakura.utilities.DispatcherProvider
@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.flowOn
 
 class GetProductListUseCaseImpl(
     private val dispatcherProvider: DispatcherProvider,
-    private val repository: ShopRepository
+    private val repository: ShoppingItemsRepository
 ): GetProductListUseCase {
     override fun getProducts(): Flow<Outcome<List<ProductModel>>> = flow {
         try {

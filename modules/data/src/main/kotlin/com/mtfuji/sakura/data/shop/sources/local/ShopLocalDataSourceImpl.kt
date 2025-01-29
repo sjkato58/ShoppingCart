@@ -1,6 +1,5 @@
 package com.mtfuji.sakura.data.shop.sources.local
 
-import com.mtfuji.sakura.dataModels.ProductModel
 import com.mtfuji.sakura.dataModels.shop.ApiProductModel
 import com.mtfuji.sakura.utilities.DispatcherProvider
 import kotlinx.coroutines.withContext
@@ -19,6 +18,6 @@ class ShopLocalDataSourceImpl(
 
     override suspend fun getShoppingData(): List<ApiProductModel>
             = withContext(dispatcherProvider.io) {
-                items
+                items.toList()
             }
 }
