@@ -2,14 +2,15 @@ package com.mtfuji.sakura.firebase.usecases
 
 import com.mtfuji.sakura.firebase.DummyFirebaseConfigManager
 import com.mtfuji.sakura.utilities.DispatcherProvider
+import junit.framework.TestCase.assertEquals
+import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import org.junit.Before
+import org.junit.Test
 import java.lang.Exception
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -46,7 +47,7 @@ class InitFirebaseUseCaseImplTest {
     private lateinit var firebaseConfigManager: DummyFirebaseConfigManager
     private lateinit var useCase: InitFirebaseUseCaseImpl
 
-    @BeforeEach
+    @Before
     fun setup() {
         firebaseConfigManager = DummyFirebaseConfigManager(dispatcherProvider)
         useCase = InitFirebaseUseCaseImpl(

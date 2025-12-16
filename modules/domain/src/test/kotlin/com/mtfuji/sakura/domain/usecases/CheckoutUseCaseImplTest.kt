@@ -17,10 +17,10 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
-import org.junit.jupiter.api.Assertions.*
-
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import junit.framework.TestCase.assertEquals
+import junit.framework.TestCase.assertTrue
+import org.junit.Before
+import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class CheckoutUseCaseImplTest {
@@ -42,7 +42,7 @@ class CheckoutUseCaseImplTest {
     private lateinit var discountManager: DiscountManagerImpl
     private lateinit var useCase: CheckoutUseCase
 
-    @BeforeEach
+    @Before
     fun setUp() {
         repository = CartRepositoryImpl(dispatcherProvider)
         discountManager = DiscountManagerImpl(

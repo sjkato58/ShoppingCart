@@ -9,7 +9,6 @@ import com.mtfuji.sakura.domain.discounts.BuyTwoGetOneFreeDiscount
 import com.mtfuji.sakura.domain.discounts.PercentageOffCartDiscount
 import com.mtfuji.sakura.domain.discounts.SpecificProductDiscount
 
-
 val bundleDiscount = BundleDiscount(
     productIds = listOf(
         bananaProductModel.id,

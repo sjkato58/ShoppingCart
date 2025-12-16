@@ -59,7 +59,6 @@ dependencies {
     implementation(projects.modules.utilities)
 
     testImplementation(libs.junit)
-    testImplementation(libs.junit.jupiter)
     testImplementation(kotlin("test"))
     testImplementation(libs.kotlin.test)
     testImplementation(libs.kotlinx.coroutines.test)

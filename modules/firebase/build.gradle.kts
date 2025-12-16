@@ -52,7 +52,6 @@ dependencies {
     implementation(projects.modules.utilities)
 
     testImplementation(libs.junit)
-    testImplementation(libs.junit.jupiter)
     testImplementation(libs.kotlin.test)
     testImplementation(libs.firebase.config)
     testImplementation(libs.kotlinx.coroutines.test)
