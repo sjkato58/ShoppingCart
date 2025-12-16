@@ -1,7 +1,7 @@
 package com.mtfuji.sakura.shoppingcart
 
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
+import junit.framework.TestCase.assertEquals
+import org.junit.Test
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -11,6 +11,6 @@ import org.junit.jupiter.api.Test
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
-        Assertions.assertEquals(4, 2 + 2)
+        assertEquals(4, 2 + 2)
     }
 }

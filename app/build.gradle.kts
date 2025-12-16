@@ -41,7 +41,9 @@ android {
     buildFeatures {
         compose = true
     }
-    configureSourceSets()
+    testOptions {
+        unitTests
+    }
 }
 
 dependencies {
@@ -76,7 +78,7 @@ dependencies {
     implementation(projects.modules.utilities)
 
     testImplementation(libs.junit)
-    testImplementation(libs.junit.jupiter)
+    //testImplementation(libs.junit.jupiter)
     testImplementation(libs.kotlin.test)
     testImplementation(libs.kotlinx.coroutines.test)
 
@@ -87,18 +89,4 @@ dependencies {
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-}
-
-private fun BaseExtension.configureSourceSets() {
-    sourceSets {
-        getByName("main") {
-            java.srcDirs("src/main/java")
-        }
-        getByName("test") {
-            java.srcDirs("src/test/java", "src/main/java")
-        }
-        getByName("androidTest"){
-            java.srcDirs("src/androidTest/java")
-        }
-    }
 }
