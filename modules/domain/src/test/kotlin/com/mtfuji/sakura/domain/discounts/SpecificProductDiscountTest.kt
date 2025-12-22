@@ -7,10 +7,10 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
-import junit.framework.TestCase.assertEquals
-import junit.framework.TestCase.assertTrue
 import org.junit.Before
 import org.junit.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class SpecificProductDiscountTest {
@@ -18,10 +18,6 @@ class SpecificProductDiscountTest {
     private val testDispatcher = StandardTestDispatcher()
 
     private lateinit var discount: SpecificProductDiscount
-
-    companion object {
-        const val DISCOUNT_NAME = "Specific Product Discount"
-    }
 
     private val cartList = listOf(
         CartItemModel(
@@ -45,7 +41,7 @@ class SpecificProductDiscountTest {
         runTest(testDispatcher) {
             val result = discount.applyDiscount(listOf(), cartList)
             advanceUntilIdle()
-            println("result: $result")
+            //println("result: $result")
             assertTrue(result != null)
             assertEquals(1.6, result!!.discountAmount)
             assertEquals(listOf(seaSaltStrollerProductModel.id), result.productIds)
@@ -64,7 +60,11 @@ class SpecificProductDiscountTest {
             )
             val result = discount.applyDiscount(listOf(appliedDiscountModel),  cartList)
             advanceUntilIdle()
-            println("result: $result")
+            //println("result: $result")
             assertTrue(result == null)
         }
+
+    companion object {
+        const val DISCOUNT_NAME = "Specific Product Discount"
+    }
 }

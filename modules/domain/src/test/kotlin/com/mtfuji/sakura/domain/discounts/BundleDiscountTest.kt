@@ -5,14 +5,14 @@ import com.mtfuji.sakura.datatest.baconLettuceTomatoProductModel
 import com.mtfuji.sakura.datatest.bananaProductModel
 import com.mtfuji.sakura.datatest.seaSaltStrollerProductModel
 import com.mtfuji.sakura.domainmodels.discounts.AppliedDiscountModel
-import junit.framework.TestCase.assertEquals
-import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class BundleDiscountTest {
@@ -20,10 +20,6 @@ class BundleDiscountTest {
     private val testDispatcher = StandardTestDispatcher()
 
     private lateinit var discount: BundleDiscount
-
-    companion object {
-        const val DISCOUNT_NAME = "Meal Bundle Discount"
-    }
 
     private val cartList = listOf(
         CartItemModel(
@@ -59,14 +55,14 @@ class BundleDiscountTest {
         runTest(testDispatcher) {
             val result = discount.applyDiscount(listOf(),  cartList)
             advanceUntilIdle()
-            println("result: $result")
+            //println("result: $result")
             val productIdList = listOf(
                 bananaProductModel.id,
                 baconLettuceTomatoProductModel.id,
                 seaSaltStrollerProductModel.id
             )
             assertTrue(result != null)
-            assertEquals(3.5, result!!.discountAmount)
+            assertEquals(3.5, result.discountAmount)
             assertEquals(productIdList, result.productIds)
             assertEquals(DISCOUNT_NAME, result.discountName)
             assertEquals(-1.0, result.discountPercentage)
@@ -83,7 +79,11 @@ class BundleDiscountTest {
             )
             val result = discount.applyDiscount(listOf(appliedDiscountModel),  cartList)
             advanceUntilIdle()
-            println("result: $result")
+            //println("result: $result")
             assertTrue(result == null)
         }
+
+    companion object {
+        const val DISCOUNT_NAME = "Meal Bundle Discount"
+    }
 }

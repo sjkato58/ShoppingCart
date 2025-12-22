@@ -1,7 +1,7 @@
 package com.mtfuji.sakura.shoppingcart
 
-import junit.framework.TestCase.assertEquals
 import org.junit.Test
+import kotlin.test.assertEquals
 
 /**
  * Example local unit test, which will execute on the development machine (host).

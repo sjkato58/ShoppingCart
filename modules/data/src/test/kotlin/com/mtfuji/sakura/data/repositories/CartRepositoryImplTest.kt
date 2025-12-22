@@ -4,8 +4,6 @@ import com.mtfuji.sakura.dataModels.CartItemModel
 import com.mtfuji.sakura.datatest.appleProductModel
 import com.mtfuji.sakura.datatest.bananaProductModel
 import com.mtfuji.sakura.utilities.DispatcherProvider
-import junit.framework.TestCase.assertEquals
-import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -13,6 +11,8 @@ import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class CartRepositoryImplTest {
@@ -129,6 +129,10 @@ class CartRepositoryImplTest {
             assertEquals(CartItemModel(bananaProductModel, 1), cartList[1])
             val totalPrice = repository.getTotalCost()
             val expected = (appleProductModel.price * 3) + (bananaProductModel.price)
-            assertEquals(expected, totalPrice)
+            assertEquals(expected, totalPrice, DOUBLE_DELTA)
         }
+
+    companion object {
+        const val DOUBLE_DELTA = 1e-15
+    }
 }

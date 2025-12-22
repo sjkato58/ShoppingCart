@@ -9,10 +9,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
-import junit.framework.TestCase.assertEquals
-import junit.framework.TestCase.assertTrue
 import org.junit.Before
 import org.junit.Test
+import kotlin.test.assertEquals
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class GetCartTotalCostUseCaseImplTest {

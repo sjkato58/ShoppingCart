@@ -13,8 +13,8 @@ import com.mtfuji.sakura.domain.dummyData.buyTwoGetOneFreeDiscount
 import com.mtfuji.sakura.domain.dummyData.percentageOffCartDiscount
 import com.mtfuji.sakura.domain.dummyData.specificProductDiscount
 import com.mtfuji.sakura.utilities.DispatcherProvider
-import junit.framework.TestCase.assertEquals
-import junit.framework.TestCase.assertTrue
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher

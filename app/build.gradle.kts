@@ -8,6 +8,10 @@ plugins {
     alias(libs.plugins.google.services)
 }
 
+kotlin {
+    jvmToolchain(17)
+}
+
 android {
     namespace = "com.mtfuji.sakura.shoppingcart"
     compileSdk = 34
@@ -31,15 +35,12 @@ android {
             )
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
     buildFeatures {
         compose = true
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     testOptions {
         unitTests
@@ -78,7 +79,6 @@ dependencies {
     implementation(projects.modules.utilities)
 
     testImplementation(libs.junit)
-    //testImplementation(libs.junit.jupiter)
     testImplementation(libs.kotlin.test)
     testImplementation(libs.kotlinx.coroutines.test)
 
@@ -86,6 +86,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation(libs.kotlin.test)
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)

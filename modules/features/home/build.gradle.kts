@@ -5,6 +5,10 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
+kotlin {
+    jvmToolchain(17)
+}
+
 android {
     namespace = "com.mtfuji.sakura.home"
     compileSdk = 34
@@ -24,13 +28,6 @@ android {
                 "proguard-rules.pro"
             )
         }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
     }
 }
 
@@ -52,11 +49,12 @@ dependencies {
     implementation(libs.koin.androidx.compose)
     implementation(libs.material)
 
-    implementation(projects.modules.dataModels)
     implementation(projects.modules.m3compose)
 
     testImplementation(libs.junit)
+    testImplementation(libs.kotlin.test)
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.kotlin.test)
 }

@@ -10,7 +10,7 @@ class InitFirebaseUseCaseImplTest {
 
     //private lateinit var useCase: InitFirebaseUseCaseImpl
 
-    //@BeforeEach
+    //@Before
     fun setUp() {
         /*useCase = InitFirebaseUseCaseImpl(
             dispatcherProvider,

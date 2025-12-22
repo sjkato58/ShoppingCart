@@ -8,9 +8,10 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import org.junit.Before
+import org.junit.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class ShopLocalDataSourceImplTest {
@@ -50,7 +51,7 @@ class ShopLocalDataSourceImplTest {
 
     private lateinit var dataSource: ShopLocalDataSourceImpl
 
-    @BeforeEach
+    @Before
     fun setUp() {
         dataSource = ShopLocalDataSourceImpl(dispatcherProvider)
     }
@@ -63,10 +64,8 @@ class ShopLocalDataSourceImplTest {
 
         val result = dataSource.getShoppingData()
         advanceUntilIdle()
-        //println("result $result")
 
         assertTrue(result.isNotEmpty())
         assertEquals(exampleList, result)
     }
-
 }

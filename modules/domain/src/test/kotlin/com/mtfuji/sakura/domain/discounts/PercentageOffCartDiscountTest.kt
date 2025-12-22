@@ -6,24 +6,20 @@ import com.mtfuji.sakura.datatest.bananaProductModel
 import com.mtfuji.sakura.datatest.carrotProductModel
 import com.mtfuji.sakura.domainmodels.discounts.AppliedDiscountModel
 import com.mtfuji.sakura.domain.dummyData.buyTwoGetOneFreeDiscount
-import junit.framework.TestCase.assertEquals
-import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class PercentageOffCartDiscountTest {
     private val testDispatcher = StandardTestDispatcher()
 
     private lateinit var discount: PercentageOffCartDiscount
-
-    companion object {
-        const val DISCOUNT_NAME = "Cart Discount"
-    }
 
     private val cartList = listOf(
         CartItemModel(
@@ -54,7 +50,7 @@ class PercentageOffCartDiscountTest {
         runTest(testDispatcher) {
             val result = discount.applyDiscount(listOf(), cartList)
             advanceUntilIdle()
-            println("result: $result")
+            //println("result: $result")
             assertTrue(result != null)
             assertEquals(DISCOUNT_NAME, result!!.discountName)
             assertEquals(25.00, result.discountPercentage)
@@ -71,7 +67,11 @@ class PercentageOffCartDiscountTest {
             )
             val result = discount.applyDiscount(listOf(appliedDiscountModel), cartList)
             advanceUntilIdle()
-            println("result: $result")
+            //println("result: $result")
             assertTrue(result == null)
         }
+
+    companion object {
+        const val DISCOUNT_NAME = "Cart Discount"
+    }
 }

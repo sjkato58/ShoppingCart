@@ -3,14 +3,14 @@ package com.mtfuji.sakura.domain.discounts
 import com.mtfuji.sakura.dataModels.CartItemModel
 import com.mtfuji.sakura.datatest.appleProductModel
 import com.mtfuji.sakura.domainmodels.discounts.AppliedDiscountModel
-import junit.framework.TestCase.assertEquals
-import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class BuyTwoGetOneFreeDiscountTest {
@@ -18,10 +18,6 @@ class BuyTwoGetOneFreeDiscountTest {
     private val testDispatcher = StandardTestDispatcher()
 
     private lateinit var discount: BuyTwoGetOneFreeDiscount
-
-    companion object {
-        const val DISCOUNT_NAME = "Buy 2 get 1 free Discount"
-    }
 
     private val cartList = listOf(
         CartItemModel(
@@ -44,9 +40,9 @@ class BuyTwoGetOneFreeDiscountTest {
         runTest(testDispatcher) {
             val result = discount.applyDiscount(listOf(), cartList)
             advanceUntilIdle()
-            println("result: $result")
+            //println("result: $result")
             assertTrue(result != null)
-            assertEquals(1.5, result!!.discountAmount)
+            assertEquals(1.5, result.discountAmount)
             assertEquals(listOf(appleProductModel.id), result.productIds)
             assertEquals(DISCOUNT_NAME, result.discountName)
             assertEquals(-1.0, result.discountPercentage)
@@ -63,7 +59,10 @@ class BuyTwoGetOneFreeDiscountTest {
             )
             val result = discount.applyDiscount(listOf(appliedDiscountModel),  cartList)
             advanceUntilIdle()
-            println("result: $result")
             assertTrue(result == null)
         }
+
+    companion object {
+        const val DISCOUNT_NAME = "Buy 2 get 1 free Discount"
+    }
 }

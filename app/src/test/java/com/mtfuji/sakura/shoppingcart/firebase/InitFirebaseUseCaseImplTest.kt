@@ -4,8 +4,6 @@ package com.mtfuji.sakura.shoppingcart.firebase
 import com.mtfuji.sakura.utilities.DispatcherProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.test.StandardTestDispatcher
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.Test
 
 class InitFirebaseUseCaseImplTest {
     private val testDispatcher = StandardTestDispatcher()
