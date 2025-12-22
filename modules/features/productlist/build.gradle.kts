@@ -52,6 +52,7 @@ dependencies {
     implementation(libs.koin.androidx.compose)
     implementation(libs.material)
 
+    implementation(projects.modules.data)
     implementation(projects.modules.dataModels)
     implementation(projects.modules.domain)
     implementation(projects.modules.domainModels)
