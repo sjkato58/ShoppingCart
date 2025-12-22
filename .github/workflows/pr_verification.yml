@@ -18,6 +18,9 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
     - name: Initialize
       uses: ./.github/actions/setup-project
       with:
@@ -36,6 +39,9 @@ jobs:
   unit-tests:
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
     - name: Initialize
       uses: ./.github/actions/setup-project
       with:

@@ -2,23 +2,22 @@ name: On Merge
 
 on:
   push:
-    branches: [ "develop", "main" ] # Run when code is merged into these branches
+    branches: [ "develop", "master" ] # Run when code is merged into these branches
+
+permissions:
+  contents: write # Needs write permission to update the dependency graph in GitHub
 
 jobs:
   dependency-submission:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write # Needs write permission to update the dependency graph in GitHub
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
+      - name: Initialize
+        uses: ./.github/actions/setup-project
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          cache-read-only: 'false'
 
       - name: Generate and Submit Dependency Graph
         uses: gradle/actions/dependency-submission@v4
