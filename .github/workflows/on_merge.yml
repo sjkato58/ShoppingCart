@@ -1,0 +1,25 @@
+name: On Merge
+
+on:
+  push:
+    branches: [ "develop", "master" ] # Run when code is merged into these branches
+
+permissions:
+  contents: write # Needs write permission to update the dependency graph in GitHub
+
+jobs:
+  dependency-submission:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Initialize
+        uses: ./.github/actions/setup-project
+        with:
+          cache-read-only: 'false'
+
+      - name: Generate and Submit Dependency Graph
+        uses: gradle/actions/dependency-submission@v4
+        # This action automatically detects all your modules 
+        # (Android, Java, Kotlin) and tells GitHub about them.

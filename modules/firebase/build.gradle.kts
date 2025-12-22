@@ -1,9 +1,11 @@
-import com.android.build.gradle.BaseExtension
-
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.services)
+}
+
+kotlin {
+    jvmToolchain(17)
 }
 
 android {
@@ -26,14 +28,6 @@ android {
             )
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-    configureSourceSets()
 }
 
 dependencies {
@@ -53,25 +47,11 @@ dependencies {
     implementation(projects.modules.utilities)
 
     testImplementation(libs.junit)
-    testImplementation(libs.junit.jupiter)
     testImplementation(libs.kotlin.test)
     testImplementation(libs.firebase.config)
     testImplementation(libs.kotlinx.coroutines.test)
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-}
-
-private fun BaseExtension.configureSourceSets() {
-    sourceSets {
-        getByName("main") {
-            java.srcDirs("src/main/java")
-        }
-        getByName("test") {
-            java.srcDirs("src/test/java", "src/main/java")
-        }
-        getByName("androidTest"){
-            java.srcDirs("src/androidTest/java")
-        }
-    }
+    androidTestImplementation(libs.kotlin.test)
 }

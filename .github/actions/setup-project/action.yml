@@ -1,0 +1,24 @@
+name: 'Setup Project'
+description: 'Standard setup for Checkout, Java, and Gradle'
+
+# Define a parameter here
+inputs:
+  cache-read-only:
+    description: 'Whether the Gradle cache should be read-only'
+    required: false
+    default: 'false' # By default, it will allow writing to the cache
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v4
+      with:
+        # We pass the input value down to the actual gradle action
+        cache-read-only: ${{ inputs.cache-read-only }}

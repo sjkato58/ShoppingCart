@@ -5,6 +5,10 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
+kotlin {
+    jvmToolchain(17)
+}
+
 android {
     namespace = "com.mtfuji.sakura.features.productlist"
     compileSdk = 34
@@ -24,13 +28,6 @@ android {
                 "proguard-rules.pro"
             )
         }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
     }
 }
 
@@ -52,6 +49,7 @@ dependencies {
     implementation(libs.koin.androidx.compose)
     implementation(libs.material)
 
+    implementation(projects.modules.data)
     implementation(projects.modules.dataModels)
     implementation(projects.modules.domain)
     implementation(projects.modules.domainModels)
@@ -59,8 +57,6 @@ dependencies {
     implementation(projects.modules.utilities)
 
     testImplementation(libs.junit)
-    testImplementation(libs.junit.jupiter)
-    testImplementation(kotlin("test"))
     testImplementation(libs.kotlin.test)
     testImplementation(libs.kotlinx.coroutines.test)
 
@@ -68,6 +64,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation(libs.kotlin.test)
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
