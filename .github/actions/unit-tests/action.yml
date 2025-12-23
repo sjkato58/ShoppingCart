@@ -1,0 +1,10 @@
+name: 'Unit Tests'
+description: 'Code to run Unit Tests'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Run DebugUnitTest
+      # We run testDebugUnitTest specifically.
+      # It's faster than 'build' and covers compilation + testing.
+      run: ./gradlew testDebugUnitTest --stacktrace

@@ -48,9 +48,7 @@ jobs:
         cache-read-only: ${{ github.ref != 'refs/heads/develop' }}
 
     - name: Run Unit Tests
-      # We run testDebugUnitTest specifically.
-      # It's faster than 'build' and covers compilation + testing.
-      run: ./gradlew testDebugUnitTest --stacktrace
+      uses: ./.github/actions/unit-tests
 
     # Optional: Only upload reports if a test fails so you can see why
     - name: Upload Test Reports
