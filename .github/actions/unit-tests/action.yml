@@ -1,0 +1,17 @@
+name: 'Unit Tests'
+description: 'Code to run Unit Tests'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Run DebugUnitTest
+      shell: bash
+      run: ./gradlew testDebugUnitTest --stacktrace
+
+    # Optional: Only upload reports if a test fails so you can see why
+    - name: Upload Test Reports
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: unit-test-reports
+        path: '**/build/reports/tests/'

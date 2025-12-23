@@ -3,9 +3,8 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.jvm)
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+kotlin {
+    jvmToolchain(17)
 }
 
 dependencies {
@@ -16,7 +15,6 @@ dependencies {
     implementation(projects.modules.domainModels)
 
     testImplementation(libs.junit)
-    testImplementation(libs.junit.jupiter)
     testImplementation(libs.koin.test)
     testImplementation(projects.modules.dataTest)
 

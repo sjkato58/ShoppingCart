@@ -7,10 +7,11 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import org.junit.Before
+import org.junit.Test
 import java.lang.Exception
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class InitFirebaseUseCaseImplTest {
@@ -27,18 +28,6 @@ class InitFirebaseUseCaseImplTest {
             get() = testDispatcher
     }
 
-    companion object {
-        const val PRODUCT_LIST_KEY = "product_list"
-        const val PRODUCT_ID = "12345"
-        const val PRODUCT_NAME = "Apple"
-        const val PRODUCT_PRICE = "0.75"
-        const val PRODUCT_DESCRIPTION = "Pink Lady, Single, Fresh and firm"
-        const val PRODUCT_IMAGE = "misc"
-        const val PRODUCT_CATEGORY = "Fruit"
-        const val PRODUCT_LIST_VALUE = "[{\"id\":\"$PRODUCT_ID\",\"name\":\"$PRODUCT_NAME\",\"price\":$PRODUCT_PRICE,\"description\":\"$PRODUCT_DESCRIPTION\",\"imageUrl\":\"$PRODUCT_IMAGE\",\"category\":\"$PRODUCT_CATEGORY\"}]"
-        const val EXCEPTION_MESSAGE = "Something went dreadfully wrong!"
-    }
-
     private val dummyDefault: Map<String, Any> = mapOf(
         Pair(PRODUCT_LIST_KEY, PRODUCT_LIST_VALUE)
     )
@@ -46,7 +35,7 @@ class InitFirebaseUseCaseImplTest {
     private lateinit var firebaseConfigManager: DummyFirebaseConfigManager
     private lateinit var useCase: InitFirebaseUseCaseImpl
 
-    @BeforeEach
+    @Before
     fun setup() {
         firebaseConfigManager = DummyFirebaseConfigManager(dispatcherProvider)
         useCase = InitFirebaseUseCaseImpl(
@@ -94,8 +83,19 @@ class InitFirebaseUseCaseImplTest {
             }
             advanceUntilIdle()
 
-            assertTrue(result != null)
             assertTrue(result is Exception)
-            assertEquals(defaultException.message, result?.message)
+            assertEquals(defaultException.message, result.message)
         }
+
+    companion object {
+        const val PRODUCT_LIST_KEY = "product_list"
+        const val PRODUCT_ID = "12345"
+        const val PRODUCT_NAME = "Apple"
+        const val PRODUCT_PRICE = "0.75"
+        const val PRODUCT_DESCRIPTION = "Pink Lady, Single, Fresh and firm"
+        const val PRODUCT_IMAGE = "misc"
+        const val PRODUCT_CATEGORY = "Fruit"
+        const val PRODUCT_LIST_VALUE = "[{\"id\":\"$PRODUCT_ID\",\"name\":\"$PRODUCT_NAME\",\"price\":$PRODUCT_PRICE,\"description\":\"$PRODUCT_DESCRIPTION\",\"imageUrl\":\"$PRODUCT_IMAGE\",\"category\":\"$PRODUCT_CATEGORY\"}]"
+        const val EXCEPTION_MESSAGE = "Something went dreadfully wrong!"
+    }
 }
