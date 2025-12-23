@@ -5,8 +5,7 @@ runs:
   using: "composite"
   steps:
     - name: Run DebugUnitTest
-      # We run testDebugUnitTest specifically.
-      # It's faster than 'build' and covers compilation + testing.
+      shell: bash
       run: ./gradlew testDebugUnitTest --stacktrace
 
     # Optional: Only upload reports if a test fails so you can see why
