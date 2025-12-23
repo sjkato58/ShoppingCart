@@ -2,13 +2,28 @@ name: On Merge
 
 on:
   push:
-    branches: [ "develop", "master" ] # Run when code is merged into these branches
+    branches: [ "main" ] # Run when code is merged into these branches
 
 permissions:
   contents: write # Needs write permission to update the dependency graph in GitHub
 
 jobs:
-  dependency-submission:
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Initialize
+        uses: ./.github/actions/setup-project
+        with:
+          cache-read-only: ${{ github.ref != 'refs/heads/main' }}
+
+      - name: Run Unit Tests
+        uses: ./.github/actions/unit-tests
+
+  build-and-archive:
+    needs: unit-tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -19,7 +34,27 @@ jobs:
         with:
           cache-read-only: 'false'
 
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-apk-${{ github.sha }} # Use the commit hash in the name
+          path: app/build/outputs/apk/debug/app-debug.apk
+
+  dependency-submission:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Initialize
+        uses: ./.github/actions/setup-project
+        with:
+          cache-read-only: ${{ github.ref != 'refs/heads/main' }}
+
       - name: Generate and Submit Dependency Graph
         uses: gradle/actions/dependency-submission@v4
-        # This action automatically detects all your modules 
-        # (Android, Java, Kotlin) and tells GitHub about them.
+        with:
+          additional-arguments: "-Dorg.gradle.project.android.registration.wait=true"

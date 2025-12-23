@@ -9,7 +9,7 @@ name: PR Verification
 
 on:
   pull_request:
-    branches: [ "develop" ]
+    branches: [ "main" ]
 
 permissions:
   contents: read
@@ -45,15 +45,7 @@ jobs:
     - name: Initialize
       uses: ./.github/actions/setup-project
       with:
-        cache-read-only: ${{ github.ref != 'refs/heads/develop' }}
+        cache-read-only: ${{ github.ref != 'refs/heads/main' }}
 
     - name: Run Unit Tests
       uses: ./.github/actions/unit-tests
-
-    # Optional: Only upload reports if a test fails so you can see why
-    - name: Upload Test Reports
-      if: failure()
-      uses: actions/upload-artifact@v4
-      with:
-        name: unit-test-reports
-        path: '**/build/reports/tests/'

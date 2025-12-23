@@ -8,3 +8,11 @@ runs:
       # We run testDebugUnitTest specifically.
       # It's faster than 'build' and covers compilation + testing.
       run: ./gradlew testDebugUnitTest --stacktrace
+
+    # Optional: Only upload reports if a test fails so you can see why
+    - name: Upload Test Reports
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: unit-test-reports
+        path: '**/build/reports/tests/'
